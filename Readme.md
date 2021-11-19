@@ -5,7 +5,7 @@
 In datamapping <https://github.com/hias222/datamapping> see details to connect to AWS IoT Core
 
 Attention:
-If you want to use multi frontend message queues, which means, that you use more than one microservices in the backend for open the websocket connect in the frontend, you must add multiple SQS Queues. You need for each process one SQS.
+If you want to use HA in frontend, which means, that you use more than one microservices in the backend for open the websocket connect in the frontend, you must add multiple SQS Queues. You need for each backend process one SQS.
 
 The alternative is to use kafka with multi groups, but it is a huge effort and much more expensive as SQS.
 
@@ -135,18 +135,21 @@ Seconds
   ]
 }
 ```
-## create chart
 
-cd swimcloud/charts
-helm create datahub
+## Install
 
-## namespace
+For testing add DNS chart-example.local to hosts point to kubernetes IP
 
-kubectl create -f admin/namespace-local.json
+* namespace: kubectl create -f admin/namespace-local.json
+* values: cp charts/swimcloud/values_example.yaml charts/swimcloud/values.yal
+* edit values
+* cd charts/swimcloud
+* helm create datahub
 
 ## ingress
 
 minikube addons enable ingress
+minikube tunnel
 
 ## deploy chart
 
